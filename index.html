@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Now — Cruise Presentation</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:linear-gradient(180deg,#edf7fb 0%,#f8fbfd 55%,#fff 100%);color:#172033;line-height:1.5;padding:10px 8px 28px}
+.container{width:100%;max-width:650px;margin:auto}
+.card{background:#fff;border:1px solid rgba(15,52,96,.08);border-radius:20px;box-shadow:0 10px 34px rgba(15,52,96,.10);overflow:hidden;margin-bottom:15px}
+
+.start-card{padding:18px;text-align:center}
+.start-card h2{font-size:1.05rem;color:#0f3460;margin:0 0 4px}
+.start-card p{font-size:.84rem;color:#66717e;margin:0 0 13px}
+.start-btn,.reserve-btn{display:block;width:100%;border:0;border-radius:13px;padding:16px 13px;font-size:.96rem;font-weight:800;letter-spacing:.15px;text-align:center;text-decoration:none;transition:transform .18s,opacity .18s}
+.start-btn{background:linear-gradient(100deg,#0f3460,#174f87,#0f3460);background-size:200% 100%;color:#fff;cursor:pointer;box-shadow:0 8px 22px rgba(15,52,96,.25);animation:buttonFlow 3s ease infinite}
+.start-btn:hover:not(:disabled){transform:translateY(-1px)}
+.start-btn:disabled{background:#e7ebef;color:#65717d;box-shadow:none;cursor:not-allowed;animation:none;opacity:1}
+.reserve-btn{margin-top:10px;background:#0e806c;color:#fff;box-shadow:0 6px 18px rgba(14,128,108,.18)}
+.reserve-btn:hover{transform:translateY(-1px)}
+.reserve-btn.inactive{background:#e7ebef;color:#8a949e;box-shadow:none;pointer-events:none;cursor:not-allowed}
+.availability-msg{margin:10px 0 0;font-size:.83rem;font-weight:650;color:#536273}
+.availability-msg.live{color:#13805c}
+.availability-msg.offline{color:#9a4a25}
+
+@keyframes buttonFlow{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+
+/* Hero */
+.hero{position:relative;min-height:475px;color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,24,46,.02) 5%,rgba(2,24,46,.08) 38%,rgba(2,24,46,.9) 100%)}
+.hero-content{position:relative;z-index:2;min-height:475px;padding:30px 23px 27px;display:flex;flex-direction:column;justify-content:flex-end}
+.kicker{font-size:.68rem;letter-spacing:2.2px;font-weight:800;color:#ffe28a;margin-bottom:7px}
+.hero h1{font-size:clamp(1.8rem,7vw,2.65rem);line-height:1.04;margin:0 0 10px;text-shadow:0 2px 13px rgba(0,0,0,.4)}
+.hero-sub{font-size:1rem;margin:0;max-width:570px}
+.hero-sub strong{color:#ffe28a}
+.hero-tag{margin-top:13px;display:inline-block;width:max-content;max-width:100%;padding:7px 11px;border-left:3px solid #ffd166;background:rgba(5,30,54,.65);font-size:.82rem;font-weight:650;border-radius:0 9px 9px 0}
+
+/* Welcome */
+.welcome{padding:17px 20px;text-align:center;background:linear-gradient(135deg,#fff,#eef8fc)}
+.welcome h2{margin:0 0 5px;color:#0f3460;font-size:1.12rem}
+.welcome p{margin:0;color:#5d6673;font-size:.88rem}
+
+/* NEW: Pulsating no-timeshare / no-purchase certificate box */
+.certificate-pulse{
+  position:relative;
+  overflow:hidden;
+  margin:13px 13px 15px;
+  padding:18px 15px;
+  text-align:center;
+  border:2px solid #15916e;
+  border-radius:16px;
+  background:linear-gradient(135deg,#eafff5 0%,#ffffff 48%,#e1fff0 100%);
+  color:#174c3b;
+  box-shadow:0 0 0 0 rgba(21,145,110,.38),0 8px 22px rgba(15,52,96,.10);
+  animation:certificatePulse 2s ease-in-out infinite;
+}
+.certificate-pulse .certificate-icon{
+  font-size:1.8rem;
+  line-height:1.2;
+  margin-bottom:7px;
+}
+.certificate-pulse .certificate-heading{
+  display:block;
+  color:#08734f;
+  font-size:1.05rem;
+  line-height:1.35;
+  font-weight:900;
+  margin-bottom:9px;
+}
+.certificate-pulse .certificate-message{
+  margin:0;
+  font-size:.9rem;
+  line-height:1.6;
+  color:#315548;
+}
+.certificate-pulse .certificate-message strong{
+  color:#075f43;
+}
+.certificate-pulse .certificate-footer{
+  display:block;
+  margin-top:11px;
+  padding:9px 10px;
+  background:#d7f8e8;
+  border:1px solid #a8e6c8;
+  border-radius:10px;
+  color:#075f43;
+  font-size:.84rem;
+  font-weight:850;
+}
+@keyframes certificatePulse{
+  0%,100%{
+    box-shadow:0 0 0 0 rgba(21,145,110,.35),0 8px 22px rgba(15,52,96,.10);
+    border-color:#15916e;
+  }
+  50%{
+    box-shadow:0 0 0 6px rgba(21,145,110,0),0 10px 26px rgba(15,52,96,.15);
+    border-color:#36bd8b;
+  }
+}
+
+/* Existing bonus */
+.bonus{position:relative;overflow:hidden;margin:13px 13px 15px;padding:14px;border:2px solid #f2c94c;border-radius:16px;background:linear-gradient(110deg,#fff6cf,#fff,#fff6cf);color:#503d0b;box-shadow:0 7px 22px rgba(15,52,96,.13)}
+.bonus-inner{position:relative;display:flex;gap:10px;align-items:flex-start}
+.bonus-icon{font-size:1.55rem;line-height:1}
+.bonus strong{color:#0f3460}
+
+/* Cruise details */
+.section{padding:21px}
+.section h2{color:#0f3460;text-align:center;font-size:1.3rem;margin:0 0 7px}
+.section-intro{text-align:center;color:#5d6673;margin:0 auto 16px;font-size:.9rem}
+.cruise-photo{width:100%;height:205px;object-fit:cover;border-radius:15px;display:block;margin-bottom:17px}
+.benefits{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.benefits li{position:relative;padding:8px 9px 8px 32px;background:#f7fafc;border-radius:10px;font-size:.88rem}
+.benefits li:before{content:"✓";position:absolute;left:9px;top:7px;width:18px;height:18px;border-radius:50%;background:#0f3460;color:#fff;font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.benefits strong{color:#0f3460}
+.closing{margin:16px 0 0;padding:12px;text-align:center;font-weight:700;color:#0f3460;background:#eef7fb;border-radius:12px}
+
+/* Main-page quick survey heads-up */
+.survey-card{padding:20px;border:1px solid #c9e0ee;background:linear-gradient(145deg,#fff,#f0f8fc)}
+.survey-card-inner{border-left:4px solid #0f668d;padding:2px 0 2px 14px}
+.survey-badge{display:inline-block;background:#0f3460;color:#fff;border-radius:6px;padding:5px 9px;font-size:.72rem;font-weight:900;letter-spacing:1px;margin-bottom:10px}
+.survey-card h2{color:#0f3460;font-size:1.12rem;margin:0 0 9px}
+.survey-card p{font-size:.86rem;color:#445363;margin:0 0 10px}
+.survey-card strong{color:#0f3460}
+.survey-highlight{padding:11px 12px;background:#e7f4fa;border-radius:10px;color:#27475b;font-size:.85rem;margin:10px 0}
+.survey-highlight strong{display:block;margin-bottom:3px}.survey-highlight .income-definition{background:#fff0bd;border:1px solid #e7bd49;border-radius:7px;padding:8px 9px;color:#5b4108}
+.survey-note{font-size:.82rem;font-weight:600;color:#20583b;background:#edf8f0;border:1px solid #b6dfc2;border-radius:9px;padding:10px 11px}.survey-note strong{color:#174d30}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(7,19,35,.70);z-index:1000;display:none;align-items:center;justify-content:center;padding:12px}
+.modal-overlay.open{display:flex}
+.modal{width:min(100%,550px);max-height:94vh;overflow:auto;background:#fff;border-radius:19px;padding:21px;box-shadow:0 22px 70px rgba(0,0,0,.35);animation:pop .2s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.modal h3{margin:0 28px 12px 0;color:#0f3460;font-size:1.17rem;line-height:1.25}
+.close{position:absolute;right:9px;top:9px;border:0;background:#eef2f6;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;color:#52606d;z-index:2}
+.modal-wrap{position:relative}
+.safety{background:#fff6e5;border:1px solid #f3c56b;border-left:4px solid #e89b13;padding:12px 13px;border-radius:10px;color:#59420b;font-size:.87rem;margin-bottom:13px}
+.continue-btn,.send-btn{display:block;width:100%;border:0;border-radius:12px;padding:14px;font-size:.97rem;font-weight:800;cursor:pointer}
+.continue-btn{background:#0f3460;color:#fff}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.choice{position:relative;border:2px solid #dce5ed;border-radius:14px;padding:17px 12px;background:#f9fbfd;text-align:left;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s;min-width:0}
+.choice:hover{transform:translateY(-2px);border-color:#0f3460}
+.choice-icon{font-size:1.55rem;margin-bottom:7px}
+.choice strong{display:block;color:#0f3460;font-size:.92rem;line-height:1.3}
+.choice span{display:block;color:#697480;font-size:.76rem;margin-top:5px}
+
+/* Eye-catching wide-screen choice */
+.choice.wide{
+  border:2px solid #e9b928;
+  background:linear-gradient(145deg,#fff8d8 0%,#fff 48%,#fff0ae 100%);
+  box-shadow:0 0 0 0 rgba(238,185,36,.62);
+  animation:widePulse 1.8s ease-in-out infinite;
+  overflow:hidden;
+}
+.choice.wide:before{
+  content:"BEST VIEWING + $100 BONUS";
+  display:block;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(90deg,#9c6810,#e2a900,#9c6810);
+  border-radius:7px;
+  padding:6px 5px;
+  margin:-6px 0 12px;
+  font-size:.66rem;
+  font-weight:900;
+  letter-spacing:.55px;
+  animation:rewardGlow 1.6s ease-in-out infinite;
+}
+.choice.wide .choice-icon{font-size:1.8rem}
+.choice.wide strong{font-size:.96rem}
+.wide-reward{
+  margin-top:12px;
+  padding:10px 8px;
+  border-radius:10px;
+  background:#fff0ae;
+  border:1px solid #edc447;
+  text-align:center;
+  animation:rewardGlow 1.6s ease-in-out infinite;
+}
+.wide-reward .reward-amount{
+  display:block;
+  color:#704600;
+  font-size:.92rem;
+  font-weight:950;
+  line-height:1.25;
+}
+.wide-reward .reward-text{
+  display:block;
+  color:#604e25;
+  font-size:.69rem;
+  font-weight:850;
+  margin-top:4px;
+  line-height:1.35;
+}
+.wide-benefit-copy{
+  margin-top:9px;
+  color:#55451e;
+  font-size:.78rem;
+  line-height:1.4;
+  font-weight:700;
+}
+@keyframes widePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(238,185,36,.5);transform:scale(1)}
+  50%{box-shadow:0 0 0 6px rgba(238,185,36,0);transform:scale(1.015)}
+}
+@keyframes rewardGlow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.09)}
+}
+
+.email-box{background:#f7fafc;border-radius:13px;padding:14px;margin-top:9px}
+.email-box label{display:block;font-size:.81rem;font-weight:700;color:#42505d;margin-bottom:6px}
+.email-box input{width:100%;padding:12px;border:1px solid #cbd6df;border-radius:9px;font:inherit;outline:none}
+.email-box input:focus{border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,.1)}
+.send-btn{margin-top:9px;background:#0f3460;color:#fff}
+.send-btn:disabled{opacity:.65;cursor:wait}
+.email-note{font-size:.73rem;color:#737e88;margin-top:7px;line-height:1.4}
+.status{font-size:.82rem;margin-top:10px;padding:9px;border-radius:9px;display:none}
+.status.success{display:block;background:#edf8f1;color:#27613c}
+.status.error{display:block;background:#fff0f0;color:#8a2f2f}
+.back{display:block;margin:11px auto 0;border:0;background:none;color:#0f3460;font-weight:700;cursor:pointer}
+.zoom-note{margin-top:11px;padding:10px;background:#eef7fb;border-radius:10px;color:#35526a;font-size:.8rem}
+
+@media(max-width:520px){
+  body{padding:7px 6px 24px}
+  .hero,.hero-content{min-height:410px}
+  .hero-content{padding:23px 17px 21px}
+  .hero h1{font-size:1.9rem}
+  .hero-tag{font-size:.76rem}
+  .section,.start-card{padding:16px}
+  .cruise-photo{height:170px}
+  .benefits li{font-size:.84rem;padding-left:30px}
+  .choice-grid{grid-template-columns:1fr}
+  .modal{padding:18px 15px}
+  .survey-card{padding:16px}
+  .certificate-pulse{margin:12px 8px;padding:16px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- CRUISE HERO -->
+  <section class="card hero">
+    <img class="hero-bg"
+      src="https://assets.princess.com/is/image/princesscruises/majestic-princess-ship-at-sea-exterior-livery-forward-bow?qlt=82&ts=1697267019766"
+      alt="Large cruise ship sailing at sea">
+    <div class="hero-content">
+      <div class="kicker">CRUISE TRAVEL PRESENTATION</div>
+      <h1>Have the Time of Your Life on a Luxury Cruise</h1>
+      <p class="hero-sub"><strong>5-Day / 4-Night Cruise for 2</strong> — discover how to enjoy a cruise vacation with great travel savings.</p>
+      <div class="hero-tag">45-minute LIVE presentation • Join from a quiet, stationary place</div>
+    </div>
+  </section>
+
+
+
+  <!-- WELCOME -->
+  <section class="welcome card">
+    <h2>Welcome &amp; Thank You for Joining</h2>
+    <p>Your Cruise Certificate will be emailed after you complete the presentation. Choose below to join now or reserve a future session.</p>
+  </section>
+
+  <!-- TOP JOIN / RESERVE CONTROLS -->
+  <section class="card start-card">
+    <h2>Ready to Join?</h2>
+    <p id="topIntro">Watch the approximately 45-minute presentation to receive your Cruise Certificate by email.</p>
+    <button class="start-btn join-control" id="startBtnTop" type="button">
+      JOIN THE LIVE PRESENTATION →
+    </button>
+    <a class="reserve-btn reserve-control" id="reserveBtnTop"
+       href="https://sam-aht.github.io/reserve-spot/" aria-disabled="true">
+      RESERVE A SPOT FOR ANOTHER SESSION →
+    </a>
+    <p class="availability-msg" id="availabilityTop" aria-live="polite"></p>
+  </section>
+
+
+
+  <!-- NEW: PULSATING CERTIFICATE MESSAGE -->
+  <section class="certificate-pulse" aria-label="Cruise certificate information">
+    <div class="certificate-icon">🎉 🚢 🎁</div>
+    <strong class="certificate-heading">
+      NOT A TIMESHARE — NO FEE TO ATTEND!
+    </strong>
+    <p class="certificate-message">
+      This is <strong>not a timeshare presentation</strong>. As a thank-you for your time, your Cruise Certificate will be sent by email after you <strong>stay through the approximately 45-minute presentation</strong> and follow the host’s instructions.
+    </p>
+    <strong class="certificate-footer">
+      Join the presentation • Stay until the end • Receive your certificate by email
+    </strong>
+  </section>
+
+  <!-- $100 BONUS -->
+  <section class="bonus">
+    <div class="bonus-inner">
+      <div class="bonus-icon">🎁</div>
+      <div>
+        <strong>+$100 Rewards Voucher Bonus</strong><br>
+        Use a <strong>laptop, desktop, or tablet</strong> for the best viewing experience and receive the bonus on top of your Travel Certificate.
+      </div>
+    </div>
+  </section>
+
+  <!-- CRUISE DETAILS -->
+  <section class="card section">
+    <img class="cruise-photo"
+      src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=1600&q=90"
+      alt="Luxury cruise ship sailing on blue ocean">
+
+    <h2>5-Day / 4-Night Luxury Cruise for 2</h2>
+    <p class="section-intro">Valid for 24 months — redeem now, travel later.</p>
+
+    <ul class="benefits">
+      <li><strong>Sailing from:</strong> Miami, Port Canaveral or Los Angeles</li>
+      <li><strong>Fully transferable</strong> before activation</li>
+      <li><strong>24-month validity</strong></li>
+      <li>Sail to <strong>Cozumel, Nassau Bahamas or Ensenada Mexico</strong></li>
+      <li><strong>No timeshare or onboard sales presentation</strong></li>
+      <li><strong>Breakfast, lunch &amp; dinner buffet</strong></li>
+      <li><strong>Vegas-style entertainment</strong></li>
+      <li><strong>Access to onboard facilities</strong></li>
+    </ul>
+
+    <div class="closing"><strong>Redeem Now, Travel Later!</strong></div>
+  </section>
+
+  <!-- QUICK CHECK-IN SURVEY HEADS-UP -->
+  <section class="card survey-card">
+    <div class="survey-card-inner">
+      <div class="survey-badge">QUICK CHECK-IN SURVEY</div>
+      <h2>One Quick Step When You Join</h2>
+
+      <p>When you join, please complete a brief audience check-in. It may ask about U.S./Canadian residency and <strong>combined annual household income</strong>.</p>
+
+      <div class="survey-highlight">
+        <strong>What does combined annual household income mean?</strong>
+        <strong class="income-definition">The total income of you, your spouse or partner, and contributing family members.</strong>
+      </div>
+
+      <p><strong>Ideally above $50,000/year.</strong> This is a guideline, not a requirement to participate.</p>
+
+      <div class="survey-note">
+        Your answers will <strong>not affect your eligibility to participate—you are already invited.</strong> These questions help us profile our audience for research purposes. You can review and answer them when the presentation opens; there’s nothing else to fill out on this page.
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM JOIN / RESERVE CONTROLS -->
+  <section class="card start-card">
+    <h2>Ready to Join?</h2>
+    <p id="bottomIntro">Watch the approximately 45-minute presentation to receive your Cruise Certificate by email.</p>
+    <button class="start-btn join-control" id="startBtnBottom" type="button">
+      JOIN THE LIVE PRESENTATION →
+    </button>
+    <a class="reserve-btn reserve-control" id="reserveBtnBottom"
+       href="https://sam-aht.github.io/reserve-spot/" aria-disabled="true">
+      RESERVE A SPOT FOR ANOTHER SESSION →
+    </a>
+    <p class="availability-msg" id="availabilityBottom" aria-live="polite"></p>
+  </section>
+
+</div>
+
+<!-- JOIN MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-wrap">
+    <div class="modal">
+      <button class="close" id="closeBtn" aria-label="Close" type="button">×</button>
+
+      <!-- SAFETY REMINDER -->
+      <div id="safetyStep">
+        <h3>Before You Continue</h3>
+        <div class="safety">
+          <strong>Please join from a quiet, stationary place.</strong><br><br>
+          For safety, we cannot accommodate participants who are driving or in a moving vehicle.
+        </div>
+        <button class="continue-btn" id="safetyContinue" type="button">
+          I UNDERSTAND — CONTINUE
+        </button>
+      </div>
+
+      <!-- DEVICE CHOICE -->
+      <div id="choiceStep" style="display:none">
+        <h3>Choose How You’re Connecting</h3>
+
+        <div class="choice-grid">
+          <button class="choice" id="mobileChoice" type="button">
+            <div class="choice-icon">📱</div>
+            <strong>Mobile Phone</strong>
+            <span>Go directly to the presentation.</span>
+          </button>
+
+          <button class="choice wide" id="wideChoice" type="button">
+            <div class="choice-icon">💻</div>
+            <strong>Laptop, Desktop or Tablet</strong>
+            <span>Enjoy the presentation on a larger screen for a better viewing experience.</span>
+
+            <div class="wide-reward">
+              <span class="reward-amount">+$100 REWARDS VOUCHER</span>
+              <span class="reward-text">ON TOP OF YOUR TRAVEL CERTIFICATE</span>
+            </div>
+
+            <div class="wide-benefit-copy">
+              Joining this way qualifies you to receive the $100 Rewards Voucher on top of your Travel Certificate — plus the best viewing experience!
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- WIDE-SCREEN OPTIONS: DIRECT BROWSER ACCESS OR OPTIONAL EMAIL COPY -->
+      <div id="wideStep" style="display:none">
+        <h3>Watch on Your Laptop, Desktop or Tablet</h3>
+
+        <div class="bonus" style="margin:0 0 12px">
+          <div class="bonus-inner">
+            <div class="bonus-icon">🎁</div>
+            <div>
+              <strong>+$100 Rewards Voucher Bonus</strong><br>
+              Use a laptop, desktop, or tablet for the best viewing experience and the additional voucher, subject to the offer’s participation requirements.
+            </div>
+          </div>
+        </div>
+
+        <div class="zoom-note">
+          <strong>Option 1 — Open the presentation now</strong><br>
+          Select the button below, or open Chrome or Safari on your wide-screen device and type <strong>live.travelaht.com/aht</strong> into the address bar. If Zoom is installed, it may open automatically. Otherwise, choose <strong>“Join from your browser”</strong> if that option is offered.
+        </div>
+        <a class="send-btn" id="directWideJoin" href="https://live.travelaht.com/aht" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;display:block">OPEN PRESENTATION ON THIS DEVICE →</a>
+
+        <div class="email-box">
+          <strong style="display:block;color:#0f3460;margin-bottom:5px">Option 2 — Email me a copy of the link</strong>
+          <div class="email-note" style="margin:0 0 10px">This is optional. You can join directly above without requesting an email.</div>
+          <label for="email">Email address for the presentation link</label>
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+          <button class="send-btn" id="sendZoom" type="button">EMAIL ME THE PRESENTATION LINK</button>
+          <div class="status" id="status" aria-live="polite"></div>
+        </div>
+
+        <div class="zoom-note">
+          <strong>Tip:</strong> If the Zoom app opens, follow its prompts. If you prefer not to install the app, look for “Join from your browser” on the Zoom page, if available. Please remain in a quiet, stationary location.
+        </div>
+        <button class="back" id="wideBack" type="button">← Back to device options</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   LIVE SCHEDULE — EASTERN TIME
+   Join is active from 1:45 PM until 8:45 PM ET.
+   At 8:45 PM ET, join becomes inactive and reservation
+   becomes active. The America/New_York time zone adjusts
+   automatically for daylight saving time.
+   ========================================================= */
+
+const START_HOUR = 13;
+const START_MIN = 45;
+const END_HOUR = 20;
+const END_MIN = 45;
+
+const MOBILE_LINK = "https://live.travelaht.com/aht";
+const RESERVE_LINK = " https://sam-aht.github.io/reserve-spot/";
+
+const EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1s4eC5HwoiC44qucHUoqauckf92CItkR5tgFFXbvcl2HIaos_Iy5-EwA2HsoEyzx_dw/exec";
+
+const modal = document.getElementById("modal");
+const safety = document.getElementById("safetyStep");
+const choices = document.getElementById("choiceStep");
+const wide = document.getElementById("wideStep");
+const statusBox = document.getElementById("status");
+
+const joinButtons = [
+  document.getElementById("startBtnTop"),
+  document.getElementById("startBtnBottom")
+];
+
+const reserveButtons = [
+  document.getElementById("reserveBtnTop"),
+  document.getElementById("reserveBtnBottom")
+];
+
+const availabilityMessages = [
+  document.getElementById("availabilityTop"),
+  document.getElementById("availabilityBottom")
+];
+
+function getEasternTimeParts() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(new Date());
+
+  const values = {};
+
+  parts.forEach(part => {
+    if (part.type === "hour" || part.type === "minute") {
+      values[part.type] = Number(part.value);
+    }
+  });
+
+  return values;
+}
+
+function isLiveNow() {
+  const et = getEasternTimeParts();
+  const currentMinutes = et.hour * 60 + et.minute;
+  const startMinutes = START_HOUR * 60 + START_MIN;
+  const endMinutes = END_HOUR * 60 + END_MIN;
+
+  // Active at 1:45 PM; inactive beginning at 8:45 PM ET.
+  return currentMinutes >= startMinutes && currentMinutes < endMinutes;
+}
+
+function updateScheduleUI() {
+  const live = isLiveNow();
+
+  joinButtons.forEach(button => {
+    button.disabled = !live;
+
+    if (live) {
+      button.textContent = "JOIN THE LIVE PRESENTATION →";
+      button.setAttribute("aria-label", "Click here to start watching the presentation");
+    } else {
+      button.textContent = "WE AREN’T LIVE AT THE MOMENT";
+      button.setAttribute("aria-label", "We aren't live at the moment");
+    }
+  });
+
+  reserveButtons.forEach(button => {
+    if (live) {
+      button.classList.add("inactive");
+      button.setAttribute("aria-disabled", "true");
+      button.removeAttribute("href");
+      button.setAttribute("tabindex", "-1");
+    } else {
+      button.classList.remove("inactive");
+      button.setAttribute("aria-disabled", "false");
+      button.setAttribute("href", RESERVE_LINK);
+      button.removeAttribute("tabindex");
+    }
+  });
+
+  availabilityMessages.forEach(message => {
+    if (live) {
+      message.className = "availability-msg live";
+      message.textContent = "We’re live now! Join the presentation above.";
+    } else {
+      message.className = "availability-msg offline";
+      message.textContent = "We aren’t live at the moment. Reserve your spot below for the next session.";
+    }
+  });
+
+  // If the session ends while the modal is open, close it.
+  if (!live && modal.classList.contains("open")) {
+    closeModal();
+  }
+}
+
+updateScheduleUI();
+setInterval(updateScheduleUI, 10000);
+
+function openModal() {
+  if (!isLiveNow()) {
+    updateScheduleUI();
+    return;
+  }
+
+  safety.style.display = "block";
+  choices.style.display = "none";
+  wide.style.display = "none";
+  statusBox.className = "status";
+  statusBox.textContent = "";
+
+  const email = document.getElementById("email");
+  const sendButton = document.getElementById("sendZoom");
+
+  sendButton.disabled = false;
+  sendButton.textContent = "EMAIL ME THE PRESENTATION LINK";
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("startBtnTop").addEventListener("click", openModal);
+document.getElementById("startBtnBottom").addEventListener("click", openModal);
+document.getElementById("closeBtn").addEventListener("click", closeModal);
+
+modal.addEventListener("click", event => {
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeModal();
+});
+
+document.getElementById("safetyContinue").addEventListener("click", () => {
+  if (!isLiveNow()) {
+    closeModal();
+    updateScheduleUI();
+    return;
+  }
+
+  safety.style.display = "none";
+  choices.style.display = "block";
+});
+
+document.getElementById("mobileChoice").addEventListener("click", () => {
+  if (!isLiveNow()) {
+    closeModal();
+    updateScheduleUI();
+    return;
+  }
+
+  window.location.href = MOBILE_LINK;
+});
+
+document.getElementById("wideChoice").addEventListener("click", () => {
+  if (!isLiveNow()) {
+    closeModal();
+    updateScheduleUI();
+    return;
+  }
+
+  choices.style.display = "none";
+  wide.style.display = "block";
+});
+
+document.getElementById("wideBack").addEventListener("click", () => {
+  wide.style.display = "none";
+  choices.style.display = "block";
+});
+
+document.getElementById("directWideJoin").addEventListener("click", event => {
+  if (!isLiveNow()) {
+    event.preventDefault();
+    statusBox.className = "status error";
+    statusBox.textContent = "The live session has closed. Please reserve a spot for the next presentation.";
+    updateScheduleUI();
+  }
+});
+
+/* Submit the Zoom-details request through Google Apps Script.
+   no-cors means the browser cannot read the response to confirm
+   actual delivery, so the visitor is told the request was submitted. */
+document.getElementById("sendZoom").addEventListener("click", async () => {
+  const email = document.getElementById("email");
+  const button = document.getElementById("sendZoom");
+
+  if (!email.value.trim()) {
+    statusBox.className = "status error";
+    statusBox.textContent = "Enter an email address only if you’d like us to email you a copy of the presentation link. You can also join directly using the button above.";
+    email.focus();
+    return;
+  }
+  if (!email.checkValidity()) {
+    email.reportValidity();
+    return;
+  }
+
+  if (!isLiveNow()) {
+    statusBox.className = "status error";
+    statusBox.textContent = "We aren’t live at the moment. Please reserve your spot for the next session.";
+    updateScheduleUI();
+    return;
+  }
+
+  if (!EMAIL_SCRIPT_URL) {
+    statusBox.className = "status error";
+    statusBox.textContent = "Email sending is not connected yet.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "SENDING…";
+  statusBox.className = "status";
+  statusBox.textContent = "";
+
+  try {
+    await fetch(EMAIL_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      body: new URLSearchParams({
+        action: "sendZoomDetails",
+        email: email.value.trim(),
+        source: "Cruise Join Now",
+        presentationUrl: MOBILE_LINK
+      }).toString()
+    });
+
+    statusBox.className = "status success";
+    statusBox.textContent = "Your email request has been submitted. Please check your inbox for the presentation link. If it doesn’t arrive shortly, check spam or junk. You can also use the direct access option above.";
+    button.textContent = "EMAIL REQUEST SUBMITTED";
+
+  } catch (error) {
+    statusBox.className = "status error";
+    statusBox.textContent = "We couldn’t submit your request. Please try again.";
+    button.disabled = false;
+    button.textContent = "EMAIL ME THE PRESENTATION LINK";
+  }
+});
+</script>
+</body>
+</html>
