@@ -255,8 +255,8 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ari
   <!-- CRUISE HERO -->
   <section class="card hero">
     <img class="hero-bg"
-      src="https://assets.princess.com/is/image/princesscruises/majestic-princess-ship-at-sea-exterior-livery-forward-bow?qlt=82&ts=1697267019766"
-      alt="Large cruise ship sailing at sea">
+      src="https://kimi-web-img.kimi.ai/img/www.travelandleisure.com/aebf9c04e0fc8199036b4822ce7b166a59d4c888.jpg"
+      alt="Carnival Celebration cruise ship sailing at sea">
     <div class="hero-content">
       <div class="kicker">CRUISE TRAVEL PRESENTATION</div>
       <h1>Have the Time of Your Life on a Luxury Cruise</h1>
@@ -269,8 +269,8 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ari
 
   <!-- WELCOME -->
   <section class="welcome card">
-    <h2>Welcome &amp; Thank You for Joining</h2>
-    <p>Your Cruise Certificate will be emailed after you complete the presentation. Choose below to join now or reserve a future session.</p>
+    <h2>Welcome!</h2>
+    <p>Simply participate in our travel webinar, where we&rsquo;ll demo our booking platform and show you how to access zero-markup travel deals. Watch our 45-minute travel presentation, and as a thank-you for your time, we&rsquo;ll gift you a <strong>5-Day/4-Night Cruise for TWO</strong>!</p>
   </section>
 
   <!-- TOP JOIN / RESERVE CONTROLS -->
@@ -462,19 +462,19 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ari
 <script>
 /* =========================================================
    LIVE SCHEDULE — EASTERN TIME
-   Join is active from 1:45 PM until 8:45 PM ET.
-   At 8:45 PM ET, join becomes inactive and reservation
+   Join is active from 12:45 PM until 7:45 PM ET.
+   At 7:45 PM ET, join becomes inactive and reservation
    becomes active. The America/New_York time zone adjusts
    automatically for daylight saving time.
    ========================================================= */
 
-const START_HOUR = 13;
+const START_HOUR = 12;
 const START_MIN = 45;
-const END_HOUR = 20;
+const END_HOUR = 19;
 const END_MIN = 45;
 
 const MOBILE_LINK = "https://live.travelaht.com/aht";
-const RESERVE_LINK = " https://sam-aht.github.io/reserve-spot/";
+const RESERVE_LINK = "https://aht-travel.github.io/reserve-spot/;
 
 const EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1s4eC5HwoiC44qucHUoqauckf92CItkR5tgFFXbvcl2HIaos_Iy5-EwA2HsoEyzx_dw/exec";
 
@@ -524,7 +524,7 @@ function isLiveNow() {
   const startMinutes = START_HOUR * 60 + START_MIN;
   const endMinutes = END_HOUR * 60 + END_MIN;
 
-  // Active at 1:45 PM; inactive beginning at 8:45 PM ET.
+  // Active at 12:45 PM; inactive beginning at 7:45 PM ET.
   return currentMinutes >= startMinutes && currentMinutes < endMinutes;
 }
 
